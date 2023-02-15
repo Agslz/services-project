@@ -11,8 +11,8 @@
 	<groupId>com.egg</groupId>
 	<artifactId>services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ServicesProject</name>
-	<description>Services project for Egg Cooperation Course.</description>
+	<name>services</name>
+	<description>Services project for Egg Cooperation Course</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
