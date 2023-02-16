@@ -25,9 +25,10 @@ public final class Customer extends Person {
 		rol = Rol.CUSTOMER;
 	}
 
-	public Customer(int id, String name, String lastname, String phoneNumber, String mail, String image,
-			String password) {
-		super(id, name, lastname, phoneNumber, mail, image, password, Rol.CUSTOMER);
+	public Customer(String name, String lastname, String phoneNumber, String mail, String image,
+			String password, String direction) {
+		super(name, lastname, phoneNumber, mail, image, password, Rol.CUSTOMER);
+		this.state = true;
 	}
 
 }
