@@ -16,8 +16,8 @@ public class Admin extends Person {
 		rol = Rol.ADMIN;
 	}
 
-	public Admin(int id, String name, String lastname, String phoneNumber, String mail, String image, String password) {
-		super(id, name, lastname, phoneNumber, mail, image, password, Rol.ADMIN);
+	public Admin(String name, String lastname, String phoneNumber, String mail, String image, String password) {
+		super(name, lastname, phoneNumber, mail, image, password, Rol.ADMIN);
 	}
 
 }

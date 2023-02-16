@@ -8,14 +8,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "person")
@@ -46,5 +44,17 @@ public abstract class Person {
 
 	@NotEmpty
 	protected Rol rol;
+
+	public Person(@NotEmpty String name, @NotEmpty String lastname, @NotEmpty String phoneNumber,
+			@NotEmpty @Email String mail, @NotEmpty String image, @NotEmpty String password, @NotEmpty Rol rol) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.phoneNumber = phoneNumber;
+		this.mail = mail;
+		this.image = image;
+		this.password = password;
+		this.rol = rol;
+	}
 
 }
