@@ -1,5 +1,6 @@
 package com.egg.services.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -28,21 +29,29 @@ public final class Supplier extends Person {
 	private List<Double> scores;
 
 	@NotEmpty
-	private boolean state;
+	private Boolean state;
 
 	@NotEmpty
 	private String biography;
 
 	public Supplier() {
 		super();
-		rol = Rol.SUPPLIER;
+		initializeDefaults();
 	}
 
 	public Supplier(String name, String lastname, String phoneNumber, String mail, String image,
 			String password, String biography) {
 		super(name, lastname, phoneNumber, mail, image, password, Rol.SUPPLIER);
+		initializeDefaults();
+	}
+	
+	
+	private void initializeDefaults() {
 		this.state = true;
-		this.biography = biography;
+		this.rol = Rol.SUPPLIER;
+		this.services = new ArrayList<Service>();
+		this.reviews = new ArrayList<Review>();
+		this.scores = new ArrayList<Double>();
 	}
 
 }

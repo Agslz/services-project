@@ -7,32 +7,36 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+
 @Table(name = "service")
 public class Service {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotEmpty
-	private boolean state;
+	private Boolean state;
 
 	@NotEmpty
 	private String serviceType;
 
 	@NotEmpty
 	private String description;
+	
+	public Service() {
+		this.state = true;
+	}
 
-	public Service(@NotEmpty boolean state, @NotEmpty String serviceType, @NotEmpty String description) {
+	public Service( @NotEmpty String serviceType, @NotEmpty String description) {
 		super();
-		this.state = state;
+		this.state = true;
 		this.serviceType = serviceType;
 		this.description = description;
 	}
