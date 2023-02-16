@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "service")
 public class Service {
@@ -32,4 +30,12 @@ public class Service {
 	@NotEmpty
 	private String description;
 
+	public Service(@NotEmpty boolean state, @NotEmpty String serviceType, @NotEmpty String description) {
+		super();
+		this.state = state;
+		this.serviceType = serviceType;
+		this.description = description;
+	}
+
+	
 }

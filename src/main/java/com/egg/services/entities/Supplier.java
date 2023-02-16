@@ -38,9 +38,11 @@ public final class Supplier extends Person {
 		rol = Rol.SUPPLIER;
 	}
 
-	public Supplier(int id, String name, String lastname, String phoneNumber, String mail, String image,
-			String password) {
-		super(id, name, lastname, phoneNumber, mail, image, password, Rol.SUPPLIER);
+	public Supplier(String name, String lastname, String phoneNumber, String mail, String image,
+			String password, String biography) {
+		super(name, lastname, phoneNumber, mail, image, password, Rol.SUPPLIER);
+		this.state = true;
+		this.biography = biography;
 	}
 
 }
