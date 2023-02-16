@@ -19,10 +19,10 @@ public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotEmpty
-	private int idClient;
+	private Integer idClient;
 
 	@NotEmpty
 	private String content;
@@ -30,7 +30,7 @@ public class Review {
 	@NotEmpty
 	private String image;
 
-	public Review(@NotEmpty int idClient, @NotEmpty String content, @NotEmpty String image) {
+	public Review(@NotEmpty Integer idClient, @NotEmpty String content, @NotEmpty String image) {
 		this.idClient = idClient;
 		this.content = content;
 		this.image = image;
