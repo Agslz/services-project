@@ -10,16 +10,17 @@ import com.egg.services.entities.Customer;
 import com.egg.services.exceptions.ServicesException;
 import com.egg.services.repositories.CustomerRepository;
 
-
 public class CustomerService extends PersonService<Customer> {
 
 	@Autowired
 	private CustomerRepository customerR;
 	
+	@Transactional(readOnly = true)
 	public List<Customer> getAll(){
 		return customerR.findAll();
 	}
 	
+	@Transactional(readOnly = true)
 	public Customer getById(Integer id) throws ServicesException {
 		Optional<Customer> custommerOpt = customerR.findById(id);
 		if (custommerOpt.isEmpty()) {
@@ -28,7 +29,7 @@ public class CustomerService extends PersonService<Customer> {
 		return custommerOpt.get();
 	}
 	 
-	 
+	@Transactional(readOnly = true)
 	 public List<Customer> getByName(String name) throws ServicesException{
 			if (null == name || name.isBlank()) {
 				throw new ServicesException("No valid name entered");
