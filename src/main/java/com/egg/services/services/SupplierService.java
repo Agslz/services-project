@@ -10,13 +10,15 @@ import com.egg.services.entities.Supplier;
 import com.egg.services.exceptions.ServicesException;
 import com.egg.services.repositories.SupplierRepository;
 
-public class SupplierService extends PersonService<Supplier> implements CrudService<Supplier>{
+public class SupplierService extends PersonService<Supplier>
+implements CrudService<Supplier>{
 
 	@Autowired 
 	private SupplierRepository supplierRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
+	//ReadOnly indicates that the query will not make changes to the database.
 	public List<Supplier> getAll(){
 		return supplierRepository.findAll();
 	}
@@ -24,10 +26,13 @@ public class SupplierService extends PersonService<Supplier> implements CrudServ
 	@Override
 	@Transactional(readOnly = true)
 	public Supplier getById(Integer id) throws ServicesException {
+		//Optional is our way of checking if what we have requested is in the database.
 		Optional<Supplier> supplierOpt = supplierRepository.findById(id);
+		//It is like a box, if it is empty the object has not been found
 		if (supplierOpt.isEmpty()) {
 			throw new ServicesException("No supplier found");	
 		} 
+		//otherwise, what we are looking for is inside
 		return supplierOpt.get();
 	}
 	
@@ -79,7 +84,9 @@ public class SupplierService extends PersonService<Supplier> implements CrudServ
 	}
 	
 	private void validateSupplier(Supplier supplier) throws ServicesException{
+		//Inherited attributes are validated
 		super.validate(supplier);
+		//And then we continue with the proper attributes
 		if (null == supplier.getServices()) {
 			throw new ServicesException("The services list has not been created");
 		}
@@ -94,6 +101,4 @@ public class SupplierService extends PersonService<Supplier> implements CrudServ
 			throw new ServicesException("No valid biography entered");
 		}
 	}
-
-	
 }
