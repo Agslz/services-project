@@ -21,7 +21,7 @@ import com.egg.services.services.SupplierService;
 
 @Controller
 @RequestMapping("/supplier")
-public class SupplierController implements CrudController<Supplier>{
+public class SupplierController implements CrudController<Supplier> {
 
 	@Autowired
 	private SupplierService supplierService;
@@ -29,7 +29,7 @@ public class SupplierController implements CrudController<Supplier>{
 	@Override
 	@GetMapping("/")
 	// If the getAllMethod is modified to throw an exception, add the catch
-	//Surrounding the first two lines
+	// Surrounding the first two lines
 	public String getAll(ModelMap model) {
 		List<Supplier> suppliers = supplierService.getAll();
 		model.put("suppliers", suppliers);
@@ -38,60 +38,65 @@ public class SupplierController implements CrudController<Supplier>{
 
 	@Override
 	@GetMapping("/save")
+	// GetMapping is responsible for sending the form to perform the action.
 	public String getForm(ModelMap model) {
 		return "supplier-form";
 	}
 
 	@Override
 	@PostMapping("/save")
-	public String create(@Valid Supplier entity, ModelMap model) {
+	// PostMapping receives the form data and when validated it is sent to the
+	// database.
+	public String create(@Valid Supplier supplier, ModelMap model) {
 		try {
-			supplierService.create(entity);
+			supplierService.create(supplier);
 			model.put("success", "supplier added successfully");
 		} catch (ServicesException se) {
 			model.put("error", se.getMessage());
-			model.put("supplierId", entity.getId());
-			// Go to another page(optional)
+			model.put("supplier", supplier);
+			return "supplier-form";
+
 		}
 
 		return "redirect:/supplier";
 	}
-	
+
 	@Override
 	@GetMapping("modify/{id}")
-	public String modify(@PathVariable Integer Id, ModelMap model) {
-		try{
-			Supplier supplier = supplierService.getById(Id);
+	// PathVariable is our way to obtain values sent through the url
+	// the value we are looking for must be placed between braces
+	public String modify(@PathVariable Integer id, ModelMap model) {
+		try {
+			Supplier supplier = supplierService.getById(id);
 			model.put("supplier", supplier);
-		}catch (ServicesException se) {
+		} catch (ServicesException se) {
 			model.put("error", se.getMessage());
 			return "suppliers-view";
 		}
 		return "supplier-form";
 	}
 
-	
 	@Override
 	@PostMapping("/modify")
 	public String modify(@Valid Supplier supplier, ModelMap model) {
 		try {
 			supplierService.update(supplier);
 			model.put("success", "supplier modified successfully");
-		}catch (ServicesException se) {
+		} catch (ServicesException se) {
 			model.put("error", se.getMessage());
 			model.put("supplier", supplier);
 			return "supplier-form";
 		}
 		return "redirect:/supplier";
 	}
-	
+
 	@Override
 	@PostMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Integer Id, ModelMap model){
+	public String delete(@PathVariable("id") Integer id, ModelMap model) {
 		try {
-			supplierService.delete(Id);
+			supplierService.delete(id);
 			model.put("success", "supplier dissmissed successfully");
-		}catch(ServicesException se) {
+		} catch (ServicesException se) {
 			model.put("error", se.getMessage());
 		}
 		return "redirect:/supplier";
