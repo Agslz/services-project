@@ -4,7 +4,8 @@ import com.egg.services.entities.Person;
 import com.egg.services.exceptions.ServicesException;
 
 public class PersonService<T extends Person> {
-
+	
+	//This method is in charge of validating the attributes corresponding to the abstract class
 	protected void validate(T person) throws ServicesException{
 		if (null == person) {
 			throw new ServicesException("The person has not been found");
